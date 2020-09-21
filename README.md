@@ -1,2 +1,3 @@
 # prebot
-Preflight configuration for Probot GitHub Apps
+
+Preflight configuration ui for Probot GitHub Apps
