@@ -30,8 +30,10 @@ exports.loadEnv = function loadEnv() {
   let raw = "";
 
   try {
-    fs.readFileSync(envPath, "utf8");
-  } catch {}
+    raw = fs.readFileSync(envPath, "utf8");
+  } catch {
+    raw = "";
+  }
 
   const env = dotenv.parse(raw);
 
