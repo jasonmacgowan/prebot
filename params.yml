@@ -1,0 +1,4 @@
+---
+- name: GitHub Url
+  description: Specify the GitHub instance to connect to. Leave blank if connecting to GitHub.com.
+  env: GHE_URL

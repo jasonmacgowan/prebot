@@ -1,0 +1,23 @@
+<h1>All set!</h1>
+
+<p>We're reloading your app in the background. We'll let you know when it's ready.</p>
+
+<script type="text/javascript">
+  let intervalId;
+
+  function waitForProbot() {
+    const req = new XMLHttpRequest();
+
+    req.addEventListener("load", function handleLoad() {
+      if (this.status === 200) {
+        intervalId && clearInterval(intervalId);
+        window.location.href = "/probot";
+      }
+    });
+
+    req.open("GET", "/probot");
+    req.send();
+  }
+
+  intervalId = setInterval(waitForProbot, 3000);
+</script>

@@ -2,17 +2,22 @@
   "name": "prebot",
   "version": "0.0.0",
   "private": false,
+  "bin": {
+    "prebot": "./bin/controller"
+  },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "node ./bin/www"
+    "start": "node ./bin/controller"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "js-yaml": "^3.14.0",
     "morgan": "~1.9.1"
   },
   "description": "Preflight configuration ui for Probot GitHub Apps",

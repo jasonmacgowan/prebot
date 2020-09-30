@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+require("dotenv").config();
+const { spawn } = require("child_process");
+const path = require("path");
+
+/**
+ * Launch probot app in the current working directory
+ */
+function launchProbot() {
+  return spawn("probot", ["run", path.join(process.cwd(), "index.js")], {
+    stdio: [process.stdin, process.stdout, process.stderr],
+  });
+}
+
+/**
+ * Launch prebot
+ */
+function launchPrebot() {
+  return spawn("node", [path.join(__dirname, "www")], { stdio: [process.stdin, process.stdout, process.stderr] });
+}
+
+let child;
+
+/**
+ * If we're already run prebot, skip straight to probot
+ */
+if (process.env.PREBOT_CONFIGURED === "true") {
+  launchProbot();
+} else {
+  child = launchPrebot();
+
+  /**
+   * prebot will exit with code 42 when it's ready for probot to launch
+   */
+  child.on("exit", (code) => {
+    if (code === 42) {
+      child = launchProbot();
+    }
+  });
+}
+
+process.on("SIGINT", () => {
+  if (child) {
+    child.kill();
+  }
+});
+
+process.on("SIGTERM", () => {
+  if (child) {
+    child.kill();
+  }
+});

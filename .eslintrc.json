@@ -9,6 +9,8 @@
     "sourceType": "module"
   },
   "plugins": ["github"],
-  "rules": {},
+  "rules": {
+    "no-console": "off"
+  },
   "ignorePatterns": ["bin/*.js"]
 }
